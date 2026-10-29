@@ -1,0 +1,74 @@
+{
+  "title": "Bilibili Anime",
+  "author": "PAL",
+  "category": "media",
+  "icon": "tv",
+  "activationScope": "scoped",
+  "requiresHost": { "pal.plugin.hostPanel.message": 3 },
+  "extensions": ["pal.ui.panel"],
+  "permissions": [
+    "pal.network.fetch",
+    "pal.browser.control",
+    "pal.storage.read",
+    "pal.storage.write"
+  ],
+  "hostRenderers": {
+    "anime": { "root": "dist/ui", "entry": "host.js" }
+  },
+  "locales": {
+    "zh-CN": {
+      "name": "哔哩哔哩番剧",
+      "description": "在对话中搜索番剧、选择分集并播放。"
+    }
+  },
+  "declarations": {
+    "provides": {
+      "ui": [
+        {
+          "id": "pal.bilibili-anime.player",
+          "slot": "pal.ui.panel",
+          "description": "Interactive anime search and episode player",
+          "messagePresentation": true,
+          "contentDirective": "bilibili-anime"
+        }
+      ]
+    }
+  },
+  "tools": [
+    {
+      "id": "bilibili_search_anime",
+      "title": "Search Bilibili anime",
+      "description": "Search Bilibili anime and create an interactive player in this conversation. Include the returned directive verbatim on its own line in your reply, outside code fences. The player supports season and episode switching without another model call.",
+      "requiredPermissions": [
+        "pal.network.fetch",
+        "pal.storage.read",
+        "pal.storage.write"
+      ],
+      "workspaceEffects": "none",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["keyword"],
+        "properties": {
+          "keyword": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "max_seasons": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8,
+            "default": 5
+          }
+        }
+      },
+      "locales": { "zh-CN": { "title": "搜索哔哩哔哩番剧" } }
+    }
+  ],
+  "promptSections": [
+    {
+      "id": "bilibili-player",
+      "description": "Show the interactive anime player",
+      "mode": "static",
+      "when": { "anyToolAvailable": ["bilibili_search_anime"] },
+      "text": "When the user requests anime on Bilibili, call bilibili_search_anime. The tool stores its result as a plugin-owned player. Copy its directive exactly on a standalone line in your reply, outside code fences. Do not reconstruct the player in Markdown or repeat the episode list. Clicking seasons or episodes is handled directly by the plugin. Playback is provided by Bilibili's official player."
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+:host {
+  display: block;
+  min-width: 0;
+  font-family: inherit;
+}
+* {
+  box-sizing: border-box;
+}
+.anime-player {
+  width: 100%;
+  max-width: 560px;
+  min-width: 0;
+  padding: 12px;
+  color: var(--mu-ink);
+  background: var(--mu-card);
+  border: 1px solid var(--mu-line);
+  border-radius: 12px;
+  font-size: 13px;
+}
+.anime-search {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 0 0 10px;
+}
+.anime-search > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+.anime-search .mu-field {
+  min-width: 0;
+}
+.anime-search .mu-input {
+  font-size: 13px;
+}
+.anime-search > button {
+  flex: none;
+}
+.anime-seasons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 10px;
+}
+.anime-player .mu-button {
+  min-height: 26px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: var(--mu-font-weight-normal, 400);
+}
+.anime-seasons .mu-button {
+  max-width: 100%;
+  height: auto;
+  white-space: normal;
+  text-align: left;
+}
+.anime-player button[aria-pressed="true"] {
+  background: var(--mu-soft);
+  box-shadow: inset 0 0 0 1px var(--mu-line);
+  color: var(--mu-ink);
+}
+.anime-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-bottom: 8px;
+}
+.anime-heading strong {
+  font-size: 13px;
+  font-weight: 550;
+}
+.anime-heading > span {
+  color: var(--mu-muted);
+  font-size: 11px;
+}
+.anime-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 7px;
+  background: var(--mu-soft);
+}
+.anime-placeholder,
+.anime-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  color: var(--mu-muted);
+  text-align: center;
+}
+.anime-placeholder {
+  position: absolute;
+  inset: 0;
+}
+.anime-placeholder span {
+  font-size: 12px;
+}
+.anime-empty {
+  min-height: 170px;
+  padding: 20px;
+}
+.anime-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 38px;
+  padding-top: 4px;
+}
+.anime-episode-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+.anime-episode-heading > :last-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--mu-muted);
+  font-size: 12px;
+}
+.anime-episode-number {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+}
+.anime-actions {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 2px;
+}
+.anime-actions .mu-button {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  padding: 4px;
+}
+.anime-divider {
+  height: 12px;
+  width: 1px;
+  margin: 0 3px;
+  background: var(--mu-line);
+}
+.anime-episodes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  gap: 5px;
+  max-height: 164px;
+  overflow-y: auto;
+  padding: 4px 2px 2px;
+  scrollbar-width: thin;
+}
+.anime-episodes .mu-button {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--mu-line);
+  font-variant-numeric: tabular-nums;
+}
+.anime-error {
+  padding: 7px 0;
+  color: var(--mu-danger);
+  font-size: 12px;
+}
+.anime-player :focus-visible {
+  outline: none !important;
+  box-shadow: none;
+}
+@media (max-width: 420px) {
+  .anime-player {
+    padding: 9px;
+  }
+  .anime-controls {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+    padding-bottom: 4px;
+  }
+  .anime-actions {
+    align-self: flex-end;
+  }
+}
