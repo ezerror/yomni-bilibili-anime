@@ -1,0 +1,24 @@
+{
+  "preparedAt": "2026-11-05T07:00:15.878Z",
+  "sourceWorkspace": "D:/pals/pal",
+  "sourceHead": "2cfa55319bd2ad1d65ac5d1e43a53b81b5338589",
+  "method": "npm pack --ignore-scripts from the current already-built public packages; independent file tarball install, no directory links",
+  "packages": [
+    {
+      "file": "anypal-contracts-0.1.0.tgz",
+      "sha256": "a0f44354717e62ee4e613a17a1c656d91bd561c38e603abe35033fab77f72123"
+    },
+    {
+      "file": "anypal-plugin-build-0.1.0.tgz",
+      "sha256": "47ca5e2616d8fc45393877e7fc87a421d5c3e0c1d1c34c3de19d2fb1f1f19cb9"
+    },
+    {
+      "file": "anypal-plugin-sdk-0.1.0.tgz",
+      "sha256": "89ba33366b5ef7a7ac1d71954ae526d59e2545a195ff705a07a11a60fcc2e00b"
+    },
+    {
+      "file": "anypal-ui-0.1.0.tgz",
+      "sha256": "211d169b4199c5af1f64f5852742561e196cd18fc0ebe9508133decd4732dcdd"
+    }
+  ]
+}

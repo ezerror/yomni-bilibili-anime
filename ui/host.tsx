@@ -12,6 +12,7 @@ import type {
   PluginFrontendApi,
   PluginSurfaceSnapshot,
 } from "@anypal/contracts";
+import { isServiceCancellation } from "./errors";
 import { playerUrl, selectedEpisode, type PlayerCard } from "../src/types";
 // @ts-expect-error The plugin builder embeds styles in the host ShadowRoot.
 import uiCss from "@anypal/ui/styles.css";
@@ -82,11 +83,21 @@ function AnimePlayer({ api, snapshot, active }: Props) {
   const viewport = useRef<HTMLDivElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const navigation = useRef(Promise.resolve());
+  const lifetime = useRef({ active: false });
   const currentUrl = useRef("");
   const { season, episode } = selectedEpisode(card);
   const url = episode ? playerUrl(episode) : "";
   const index =
     season?.episodes.findIndex((item) => item.id === episode?.id) ?? -1;
+
+  useEffect(() => {
+    const current = { active };
+    lifetime.current = current;
+    setBusy(false);
+    return () => {
+      current.active = false;
+    };
+  }, [api, active]);
 
   useEffect(() => {
     const next = snapshot.view.data as PlayerCard;
@@ -95,31 +106,50 @@ function AnimePlayer({ api, snapshot, active }: Props) {
   }, [snapshot.view.data]);
 
   useEffect(() => {
+    if (!active) return;
+    let disposed = false;
     const stop = api.webPreview.onChanged((state) => {
+      if (disposed) return;
       setLoading(state.loading);
       setPlayerError(!!state.error);
     });
-    return stop;
-  }, [api]);
+    return () => {
+      disposed = true;
+      stop();
+    };
+  }, [api, active]);
 
   useEffect(() => {
-    if (!url || !active || currentUrl.current === url) return;
+    if (!url || !active) {
+      currentUrl.current = "";
+      return;
+    }
+    if (currentUrl.current === url) return;
+    let disposed = false;
     currentUrl.current = url;
     setLoading(true);
     setPlayerError(false);
     navigation.current = navigation.current
       .catch(() => {})
       .then(async () => {
-        if (currentUrl.current !== url) return;
+        if (disposed || currentUrl.current !== url) return;
         try {
           await api.webPreview.command({ type: "navigate", url });
-        } catch {
-          if (currentUrl.current === url) {
+        } catch (error) {
+          if (
+            !disposed &&
+            !isServiceCancellation(error) &&
+            currentUrl.current === url
+          ) {
             setPlayerError(true);
             setLoading(false);
           }
         }
       });
+    return () => {
+      disposed = true;
+      currentUrl.current = "";
+    };
   }, [api, active, url]);
 
   useEffect(() => {
@@ -146,7 +176,10 @@ function AnimePlayer({ api, snapshot, active }: Props) {
       const signature = JSON.stringify([bounds, base.x, base.y]);
       if (lastBounds === signature) return;
       lastBounds = signature;
-      void api.webPreview.layout(bounds).catch(() => setPlayerError(true));
+      void api.webPreview.layout(bounds).catch((error) => {
+        if (active && !disposed && !isServiceCancellation(error))
+          setPlayerError(true);
+      });
     };
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(layout);
@@ -173,17 +206,29 @@ function AnimePlayer({ api, snapshot, active }: Props) {
   }, [api, active, url]);
 
   async function act(action: string, value: string) {
-    if (busy) return;
+    const current = lifetime.current;
+    if (busy || !current.active) return;
     setBusy(true);
     setError("");
     try {
       const next = await api.action(action, value);
-      setCard(next.view.data as PlayerCard);
-    } catch {
-      setError(action === "search" ? t.searchError : t.actionError);
+      if (current.active) setCard(next.view.data as PlayerCard);
+    } catch (error) {
+      if (current.active && !isServiceCancellation(error))
+        setError(action === "search" ? t.searchError : t.actionError);
     } finally {
-      setBusy(false);
+      if (current.active) setBusy(false);
     }
+  }
+
+  function playerCommand(
+    command: Parameters<Props["api"]["webPreview"]["command"]>[0],
+  ) {
+    const current = lifetime.current;
+    if (!current.active) return;
+    void api.webPreview.command(command).catch((error) => {
+      if (current.active && !isServiceCancellation(error)) setPlayerError(true);
+    });
   }
 
   function select(seasonId: number, episodeId?: string) {
@@ -308,9 +353,7 @@ function AnimePlayer({ api, snapshot, active }: Props) {
                 <span className="anime-divider" />
                 {iconAction(t.retry, <RefreshCw size={14} />, () => {
                   setPlayerError(false);
-                  void api.webPreview
-                    .command({ type: "reload" })
-                    .catch(() => setPlayerError(true));
+                  playerCommand({ type: "reload" });
                 })}
                 {iconAction(t.external, <ExternalLink size={14} />, () => {
                   void api.webPreview

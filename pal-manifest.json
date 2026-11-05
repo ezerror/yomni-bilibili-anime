@@ -3,17 +3,29 @@
   "author": "PAL",
   "category": "media",
   "icon": "tv",
-  "activationScope": "scoped",
-  "requiresHost": { "pal.plugin.hostPanel.message": 3 },
+  "requiresHost": {
+    "pal.plugin.hostPanel.message": 3,
+    "pal.plugin.hostPanel.contentDirective": 1,
+    "pal.context.catalog": 1,
+    "pal.context.lifetime": 2,
+    "pal.context.withCallPolicy": 1,
+    "pal.services.callerAuthority": 1,
+    "pal.context.selectService": 1,
+    "pal.ui.workbench.hostRenderer": 2
+  },
   "extensions": ["pal.ui.panel"],
   "permissions": [
     "pal.network.fetch",
     "pal.browser.control",
     "pal.storage.read",
-    "pal.storage.write"
+    "pal.storage.write",
+    "pal.agent-support.read"
   ],
   "hostRenderers": {
-    "anime": { "root": "dist/ui", "entry": "host.js" }
+    "anime": {
+      "root": "dist/ui",
+      "entry": "host.js"
+    }
   },
   "locales": {
     "zh-CN": {
@@ -30,6 +42,251 @@
           "description": "Interactive anime search and episode player",
           "messagePresentation": true,
           "contentDirective": "bilibili-anime"
+        }
+      ],
+      "access": [
+        {
+          "id": "pal.bilibili-anime.tools.catalog",
+          "title": "Read provided tools",
+          "description": "Read provided tools",
+          "group": {
+            "id": "pal.tools",
+            "title": "Tools",
+            "locales": {
+              "zh": {
+                "title": "工具"
+              }
+            }
+          },
+          "locales": {
+            "zh": {
+              "title": "读取所提供的工具",
+              "description": "读取所提供的工具"
+            }
+          },
+          "effect": "read",
+          "scope": "global",
+          "target": {
+            "kind": "service-method",
+            "contract": "pal.tools.provider",
+            "operation": "catalog"
+          }
+        },
+        {
+          "id": "pal.bilibili-anime.tools.validate",
+          "title": "Validate a tool call",
+          "description": "Validate a tool call",
+          "group": {
+            "id": "pal.tools",
+            "title": "Tools",
+            "locales": {
+              "zh": {
+                "title": "工具"
+              }
+            }
+          },
+          "locales": {
+            "zh": {
+              "title": "校验工具调用",
+              "description": "校验工具调用"
+            }
+          },
+          "effect": "read",
+          "scope": "global",
+          "target": {
+            "kind": "service-method",
+            "contract": "pal.tools.provider",
+            "operation": "validate"
+          }
+        },
+        {
+          "id": "pal.bilibili-anime.tools.prepare",
+          "title": "Prepare a tool call",
+          "description": "Prepare a tool call",
+          "group": {
+            "id": "pal.tools",
+            "title": "Tools",
+            "locales": {
+              "zh": {
+                "title": "工具"
+              }
+            }
+          },
+          "locales": {
+            "zh": {
+              "title": "准备工具调用",
+              "description": "准备工具调用"
+            }
+          },
+          "effect": "execute",
+          "scope": "global",
+          "target": {
+            "kind": "service-method",
+            "contract": "pal.tools.provider",
+            "operation": "prepare"
+          }
+        },
+        {
+          "id": "pal.bilibili-anime.tools.execute",
+          "title": "Execute a prepared tool",
+          "description": "Execute a prepared tool",
+          "group": {
+            "id": "pal.tools",
+            "title": "Tools",
+            "locales": {
+              "zh": {
+                "title": "工具"
+              }
+            }
+          },
+          "locales": {
+            "zh": {
+              "title": "执行已准备的工具",
+              "description": "执行已准备的工具"
+            }
+          },
+          "effect": "execute",
+          "scope": "global",
+          "target": {
+            "kind": "service-method",
+            "contract": "pal.tools.provider",
+            "operation": "execute"
+          }
+        },
+        {
+          "id": "pal.bilibili-anime.tools.release-prepared",
+          "title": "Release a tool preparation",
+          "description": "Release a tool preparation",
+          "group": {
+            "id": "pal.tools",
+            "title": "Tools",
+            "locales": {
+              "zh": {
+                "title": "工具"
+              }
+            }
+          },
+          "locales": {
+            "zh": {
+              "title": "释放工具准备资源",
+              "description": "释放工具准备资源"
+            }
+          },
+          "effect": "execute",
+          "scope": "global",
+          "target": {
+            "kind": "service-method",
+            "contract": "pal.tools.provider",
+            "operation": "releasePrepared"
+          }
+        },
+        {
+          "id": "pal.bilibili-anime.tools.preview",
+          "title": "Preview tool input",
+          "description": "Preview tool input",
+          "group": {
+            "id": "pal.tools",
+            "title": "Tools",
+            "locales": {
+              "zh": {
+                "title": "工具"
+              }
+            }
+          },
+          "locales": {
+            "zh": {
+              "title": "预览工具输入",
+              "description": "预览工具输入"
+            }
+          },
+          "effect": "read",
+          "scope": "global",
+          "target": {
+            "kind": "service-method",
+            "contract": "pal.tools.provider",
+            "operation": "preview"
+          }
+        },
+        {
+          "id": "pal.bilibili-anime.tools.result-available",
+          "title": "Check retained tool access",
+          "description": "Check retained tool access",
+          "group": {
+            "id": "pal.tools",
+            "title": "Tools",
+            "locales": {
+              "zh": {
+                "title": "工具"
+              }
+            }
+          },
+          "locales": {
+            "zh": {
+              "title": "检查工具结果访问权限",
+              "description": "检查工具结果访问权限"
+            }
+          },
+          "effect": "read",
+          "scope": "global",
+          "target": {
+            "kind": "service-method",
+            "contract": "pal.tools.provider",
+            "operation": "resultAvailable"
+          }
+        },
+        {
+          "id": "pal.bilibili-anime.support.prompt-provider.catalog",
+          "title": "Read prompt declarations",
+          "description": "Read prompt declarations",
+          "locales": {
+            "zh": {
+              "title": "读取提示词声明",
+              "description": "读取提示词声明"
+            }
+          },
+          "group": {
+            "id": "pal.agent-support",
+            "title": "Agent support",
+            "locales": {
+              "zh": {
+                "title": "运行扩展"
+              }
+            }
+          },
+          "effect": "read",
+          "scope": "global",
+          "target": {
+            "kind": "service-method",
+            "contract": "pal.agent-support.prompt-provider",
+            "operation": "catalog"
+          }
+        },
+        {
+          "id": "pal.bilibili-anime.support.prompt-provider.provide",
+          "title": "Read a prompt section",
+          "description": "Read a prompt section",
+          "locales": {
+            "zh": {
+              "title": "读取提示词片段",
+              "description": "读取提示词片段"
+            }
+          },
+          "group": {
+            "id": "pal.agent-support",
+            "title": "Agent support",
+            "locales": {
+              "zh": {
+                "title": "运行扩展"
+              }
+            }
+          },
+          "effect": "read",
+          "scope": "global",
+          "target": {
+            "kind": "service-method",
+            "contract": "pal.agent-support.prompt-provider",
+            "operation": "provide"
+          }
         }
       ]
     }
@@ -50,7 +307,11 @@
         "additionalProperties": false,
         "required": ["keyword"],
         "properties": {
-          "keyword": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "keyword": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
           "max_seasons": {
             "type": "integer",
             "minimum": 1,
@@ -59,7 +320,11 @@
           }
         }
       },
-      "locales": { "zh-CN": { "title": "搜索哔哩哔哩番剧" } }
+      "locales": {
+        "zh-CN": {
+          "title": "搜索哔哩哔哩番剧"
+        }
+      }
     }
   ],
   "promptSections": [
@@ -67,8 +332,33 @@
       "id": "bilibili-player",
       "description": "Show the interactive anime player",
       "mode": "static",
-      "when": { "anyToolAvailable": ["bilibili_search_anime"] },
+      "when": {
+        "anyToolAvailable": ["bilibili_search_anime"]
+      },
       "text": "When the user requests anime on Bilibili, call bilibili_search_anime. The tool stores its result as a plugin-owned player. Copy its directive exactly on a standalone line in your reply, outside code fences. Do not reconstruct the player in Markdown or repeat the episode list. Clicking seasons or episodes is handled directly by the plugin. Playback is provided by Bilibili's official player."
     }
-  ]
+  ],
+  "provides": {
+    "pal.bilibili-anime.agent-support.prompts": {
+      "contract": "pal.agent-support.prompt-provider",
+      "apiVersion": 1
+    },
+    "pal.bilibili-anime.tools": {
+      "contract": "pal.tools.provider",
+      "apiVersion": 1,
+      "transport": "reference"
+    }
+  },
+  "contributions": ["services"],
+  "consumes": {
+    "toolAuthorizations": {
+      "contract": "pal.tools.authorizations",
+      "apiVersion": 1,
+      "transport": "reference",
+      "optional": true,
+      "autoBind": true,
+      "bindingMode": "dynamic"
+    }
+  },
+  "optionalPermissions": ["pal.agent-support.read"]
 }

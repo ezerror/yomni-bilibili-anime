@@ -10,6 +10,10 @@ export class PlayerStore {
     this.root = root;
   }
 
+  async flush(): Promise<void> {
+    while (this.pending.size) await Promise.all([...this.pending.values()]);
+  }
+
   private file(scope: string, id: string) {
     if (id !== "library" && !/^[0-9a-f-]{36}$/.test(id))
       throw new Error("Invalid player reference");
