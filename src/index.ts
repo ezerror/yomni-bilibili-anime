@@ -4,10 +4,10 @@ import type {
   PluginUiRequest,
   ToolContext,
   ToolDefinition,
-} from "@anypal/contracts";
-import { definePlugin } from "@anypal/plugin-sdk";
-import { toolProviderContributions } from "@anypal/plugin-sdk/tool-provider";
-import { agentSupportContributions } from "@anypal/plugin-sdk/agent-support-provider";
+} from "@yomni/contracts";
+import { definePlugin } from "@yomni/plugin-sdk";
+import { toolProviderContributions } from "@yomni/plugin-sdk/tool-provider";
+import { agentSupportContributions } from "@yomni/plugin-sdk/agent-support-provider";
 import manifest from "../pal-manifest.json";
 import { BilibiliClient } from "./bilibili";
 import { PlayerStore } from "./store";

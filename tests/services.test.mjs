@@ -4,11 +4,11 @@ import { createRequire } from "node:module";
 import { randomUUID } from "node:crypto";
 import { readFile, mkdir, mkdtemp, rm } from "node:fs/promises";
 import { join, resolve } from "node:path";
-import { toolAuthorizationFingerprint } from "@anypal/plugin-sdk/tool-provider";
+import { toolAuthorizationFingerprint } from "@yomni/plugin-sdk/tool-provider";
 import {
   TOOL_AUTHORIZATIONS_CONTRACT,
   TOOL_AUTHORIZATION_PERMISSION,
-} from "@anypal/contracts/tool-provider";
+} from "@yomni/contracts/tool-provider";
 import { isServiceCancellation } from "../ui/errors.ts";
 
 const require = createRequire(import.meta.url);

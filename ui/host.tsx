@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, IconButton, Input, Tooltip, UiProvider } from "@anypal/ui";
+import { Button, IconButton, Input, Tooltip, UiProvider } from "@yomni/ui";
 import {
   ChevronLeft,
   ChevronRight,
@@ -7,17 +7,17 @@ import {
   RefreshCw,
   Search,
   Monitor,
-} from "@anypal/ui/icons";
+} from "@yomni/ui/icons";
 import type {
   PluginFrontendApi,
   PluginSurfaceSnapshot,
-} from "@anypal/contracts";
+} from "@yomni/contracts";
 import { isServiceCancellation } from "./errors";
 import { playerUrl, selectedEpisode, type PlayerCard } from "../src/types";
 // @ts-expect-error The plugin builder embeds styles in the host ShadowRoot.
-import uiCss from "@anypal/ui/styles.css";
+import uiCss from "@yomni/ui/styles.css";
 // @ts-expect-error Text CSS imports retain the public tooltip's isolated styles.
-import tooltipCss from "@anypal/ui/tooltip.css";
+import tooltipCss from "@yomni/ui/tooltip.css";
 // @ts-expect-error The plugin builder bundles stylesheet imports as text.
 import css from "./style.css";
 

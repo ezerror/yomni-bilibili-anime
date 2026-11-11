@@ -1,8 +1,8 @@
 {
-  "name": "@pal-plugin/bilibili-anime",
+  "name": "@yomni/plugin-bilibili-anime",
   "version": "0.2.0",
   "type": "module",
-  "description": "Search Bilibili anime and watch episodes inside a PAL conversation.",
+  "description": "Search Bilibili anime and watch episodes inside a Yomni conversation.",
   "license": "MIT",
   "exports": "./dist/index.cjs",
   "files": [
@@ -11,20 +11,20 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "pal-plugin-build .",
+    "build": "yomni-plugin-build .",
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --test tests/*.test.mjs",
-    "pack": "pal-plugin pack .",
-    "dev": "pal-plugin-dev .",
+    "pack": "yomni-plugin pack .",
+    "dev": "yomni-plugin-dev .",
     "pretest": "npm run build"
   },
   "devDependencies": {
-    "@anypal/contracts": "file:vendor/current/anypal-contracts-0.1.0.tgz",
-    "@anypal/plugin-build": "file:vendor/current/anypal-plugin-build-0.1.0.tgz",
-    "@anypal/plugin-sdk": "file:vendor/current/anypal-plugin-sdk-0.1.0.tgz",
-    "@anypal/ui": "file:vendor/current/anypal-ui-0.1.0.tgz",
     "@types/node": "^24.3.0",
     "@types/react": "^19.2.17",
+    "@yomni/contracts": "file:vendor/yomni-devkit/yomni-contracts-0.1.0.tgz",
+    "@yomni/plugin-build": "file:vendor/yomni-devkit/yomni-plugin-build-0.1.0.tgz",
+    "@yomni/plugin-sdk": "file:vendor/yomni-devkit/yomni-plugin-sdk-0.1.0.tgz",
+    "@yomni/ui": "file:vendor/yomni-devkit/yomni-ui-0.1.0.tgz",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "typescript": "^5.9.2"

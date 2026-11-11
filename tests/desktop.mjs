@@ -5,7 +5,7 @@ import { resolve, join } from "node:path";
 import { pathToFileURL } from "node:url";
 
 const root = resolve(import.meta.dirname, "..");
-const host = process.env.PAL_HOST_ROOT ?? resolve(root, "../../pal");
+const host = (process.env.YOMNI_HOST_ROOT ?? process.env.PAL_HOST_ROOT) ?? resolve(root, "../../pal");
 const desktop = join(host, "apps/desktop");
 const require = createRequire(join(desktop, "package.json"));
 const { _electron: electron, expect } = require("@playwright/test");
@@ -64,10 +64,10 @@ await new Promise((done) => server.listen(0, "127.0.0.1", done));
 try {
   const env = {
     ...process.env,
-    PAL_DATA_DIR: data,
-    PAL_PLUGINS_DIR: bundled,
-    PAL_TRUSTED_CORE_PLUGINS_DIR: bundled,
-    PAL_DEFAULT_CONFIG: join(desktop, "config/default.yml"),
+    YOMNI_DATA_DIR: data,
+    YOMNI_PLUGINS_DIR: bundled,
+    YOMNI_TRUSTED_CORE_PLUGINS_DIR: bundled,
+    YOMNI_DEFAULT_CONFIG: join(desktop, "config/default.yml"),
     ELECTRON_RENDERER_URL: "",
   };
   delete env.ELECTRON_RUN_AS_NODE;
@@ -187,7 +187,7 @@ try {
   }, `http://127.0.0.1:${server.address().port}/v1`);
   await page.reload();
   await page.evaluate(() => {
-    document.title = "PAL Bilibili Plugin Preview";
+    document.title = "Yomni Bilibili Plugin Preview";
   });
   await page
     .getByRole("textbox", { name: "消息", exact: true })
@@ -335,7 +335,7 @@ try {
   await page.waitForTimeout(500);
   await page.screenshot({ path: join(artifacts, "preview.png") });
   await page.evaluate(() => {
-    document.title = "PAL Bilibili Plugin Preview";
+    document.title = "Yomni Bilibili Plugin Preview";
   });
   if (messages.length !== requestCount)
     throw new Error("UI navigation unexpectedly called the model");
