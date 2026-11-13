@@ -335,7 +335,7 @@
       "when": {
         "anyToolAvailable": ["bilibili_search_anime"]
       },
-      "text": "When the user requests anime on Bilibili, call bilibili_search_anime. The tool stores its result as a plugin-owned player. Copy its directive exactly on a standalone line in your reply, outside code fences. Do not reconstruct the player in Markdown or repeat the episode list. Clicking seasons or episodes is handled directly by the plugin. Playback is provided by Bilibili's official player."
+      "text": "When the user requests anime on Bilibili, call bilibili_search_anime. The tool stores its result as a plugin-owned player. Copy its directive exactly on a standalone line in your reply, outside code fences. The directive starts with :::yomni:bilibili-anime followed by a space and the returned JSON object; preserve this entire visible prefix. Do not reconstruct the player in Markdown or repeat the episode list. Clicking seasons or episodes is handled directly by the plugin. Playback is provided by Bilibili's official player."
     }
   ],
   "provides": {

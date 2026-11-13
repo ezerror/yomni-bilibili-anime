@@ -51,5 +51,5 @@ export function playerUrl(episode: Episode): string {
 }
 
 export function playerDirective(id: string): string {
-  return `bilibili-anime${JSON.stringify({ id })}`;
+  return `:::yomni:bilibili-anime ${JSON.stringify({ id })}`;
 }

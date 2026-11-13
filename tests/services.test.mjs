@@ -263,7 +263,8 @@ test("authorized service execution creates an isolated player; UI selection pers
   const result = await f.execute({ keyword: "Frieren", max_seasons: 2 });
   assert.equal(result.count, 2);
   assert.equal(requests.length, 3);
-  const reference = result.directive.match(/(.+)/)[1];
+  assert.match(result.directive, /^:::yomni:bilibili-anime \{"id":"[a-f0-9-]+"\}$/);
+  const reference = result.directive.slice(":::yomni:bilibili-anime ".length);
   const request = uiRequest(reference);
   const panel = f.contributions.ui[0];
   const first = await panel.render(request, uiContext());
