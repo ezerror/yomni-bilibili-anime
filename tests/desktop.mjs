@@ -5,7 +5,7 @@ import { resolve, join } from "node:path";
 import { pathToFileURL } from "node:url";
 
 const root = resolve(import.meta.dirname, "..");
-const host = (process.env.YOMNI_HOST_ROOT ?? process.env.PAL_HOST_ROOT) ?? resolve(root, "../../pal");
+const host = (process.env.YOMNI_HOST_ROOT) ?? resolve(root, "../../yomni");
 const desktop = join(host, "apps/desktop");
 const require = createRequire(join(desktop, "package.json"));
 const { _electron: electron, expect } = require("@playwright/test");
@@ -79,15 +79,15 @@ try {
   });
   app.process().stderr.on("data", (value) => stderr.push(String(value)));
   let page = await app.firstWindow();
-  await page.waitForFunction(() => !!window.pal?.userAccounts, {
+  await page.waitForFunction(() => !!window.yomni?.userAccounts, {
     timeout: 60000,
   });
   if (
-    (await page.evaluate(() => window.pal.userAccounts.session())).setupRequired
+    (await page.evaluate(() => window.yomni.userAccounts.session())).setupRequired
   ) {
     // Create a synthetic local test account through the normal application API.
     await page.evaluate(() =>
-      window.pal.userAccounts.setup({
+      window.yomni.userAccounts.setup({
         username: "anime-preview",
         displayName: "Bilibili plugin preview",
         password: "Local-preview-only-2026!",
@@ -117,7 +117,7 @@ try {
       );
   }
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.waitForFunction(() => !!window.pal?.plugins, { timeout: 60000 });
+  await page.waitForFunction(() => !!window.yomni?.plugins, { timeout: 60000 });
   await app.evaluate(({ dialog }, directory) => {
     dialog.showOpenDialog = async () => ({
       canceled: false,
@@ -133,21 +133,21 @@ try {
   console.log(
     "IMPORT",
     JSON.stringify(
-      await page.evaluate(() => window.pal.plugins.importDirectory()),
+      await page.evaluate(() => window.yomni.plugins.importDirectory()),
     ),
   );
   console.log(
     "ENABLE",
     JSON.stringify(
       await page.evaluate(async () => {
-        const ticket = await window.pal.plugins.prepareEnable(
-          "pal.bilibili-anime",
+        const ticket = await window.yomni.plugins.prepareEnable(
+          "yomni.bilibili-anime",
           null,
           true,
         );
         if (!ticket.ok) return ticket;
-        return window.pal.plugins.setEnabled(
-          "pal.bilibili-anime",
+        return window.yomni.plugins.setEnabled(
+          "yomni.bilibili-anime",
           null,
           true,
           ticket.value.token,
@@ -156,15 +156,15 @@ try {
     ),
   );
   const status = await page.evaluate(async () => {
-    const item = (await window.pal.plugins.list("default")).plugins.find(
-      (entry) => entry.manifest.id === "pal.bilibili-anime",
+    const item = (await window.yomni.plugins.list("default")).plugins.find(
+      (entry) => entry.manifest.id === "yomni.bilibili-anime",
     );
     return { state: item?.state, error: item?.error };
   });
   console.log("PLUGIN_STATUS", JSON.stringify(status));
   if (status.state === "error") throw new Error(status.error);
   await page.evaluate(async (baseUrl) => {
-    await window.pal.models.saveProfile({
+    await window.yomni.models.saveProfile({
       name: "Local preview",
       protocol: "openai-chat",
       baseUrl,
@@ -172,14 +172,14 @@ try {
       models: ["preview"],
       apiKey: "local-test-only",
     });
-    const ticket = await window.pal.plugins.prepareEnable(
-      "pal.default-agent",
+    const ticket = await window.yomni.plugins.prepareEnable(
+      "yomni.default-agent",
       null,
       true,
     );
     if (ticket.ok)
-      await window.pal.plugins.setEnabled(
-        "pal.default-agent",
+      await window.yomni.plugins.setEnabled(
+        "yomni.default-agent",
         null,
         true,
         ticket.value.token,

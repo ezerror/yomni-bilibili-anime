@@ -13,14 +13,14 @@ import { isServiceCancellation } from "../ui/errors.ts";
 
 const require = createRequire(import.meta.url);
 const declaration = JSON.parse(
-  await readFile(new URL("../pal-manifest.json", import.meta.url), "utf8"),
+  await readFile(new URL("../yomni-manifest.json", import.meta.url), "utf8"),
 );
 const pkg = JSON.parse(
   await readFile(new URL("../package.json", import.meta.url), "utf8"),
 );
 const manifest = {
   ...declaration,
-  id: pkg.pal.id,
+  id: pkg.yomni.id,
   name: declaration.title,
   version: pkg.version,
   apiVersion: 1,
@@ -207,7 +207,7 @@ function mockBilibili(t) {
 }
 
 const uiRequest = (resource) => ({
-  id: "pal.bilibili-anime.player",
+  id: "yomni.bilibili-anime.player",
   locale: "en",
   projectId: value.projectId,
   sessionId: value.sessionId,

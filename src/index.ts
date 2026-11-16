@@ -8,12 +8,12 @@ import type {
 import { definePlugin } from "@yomni/plugin-sdk";
 import { toolProviderContributions } from "@yomni/plugin-sdk/tool-provider";
 import { agentSupportContributions } from "@yomni/plugin-sdk/agent-support-provider";
-import manifest from "../pal-manifest.json";
+import manifest from "../yomni-manifest.json";
 import { BilibiliClient } from "./bilibili";
 import { PlayerStore } from "./store";
 import { playerDirective, selectedEpisode, type PlayerCard } from "./types";
 
-const uiId = "pal.bilibili-anime.player";
+const uiId = "yomni.bilibili-anime.player";
 const scope = (context: ToolContext) =>
   JSON.stringify([context.projectId ?? "", context.sessionId ?? ""]);
 const cardId = (request: PluginUiRequest): string =>
@@ -50,17 +50,17 @@ const plugin = definePlugin(async ({ context: host, ui }) => {
   };
   ui.register({
     id: uiId,
-    slot: "pal.ui.panel",
+    slot: "yomni.ui.panel",
     hostRenderer: "anime",
     messagePresentation: true,
     contentDirective: "bilibili-anime",
     nativeCapabilities: ["web-preview"],
     persistentSession: true,
     requiredPermissions: [
-      "pal.network.fetch",
-      "pal.browser.control",
-      "pal.storage.read",
-      "pal.storage.write",
+      "yomni.network.fetch",
+      "yomni.browser.control",
+      "yomni.storage.read",
+      "yomni.storage.write",
     ],
     actions: ["search", "select"],
     actionLimits: { maxValueChars: 4000, timeoutMs: 45000 },

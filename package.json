@@ -6,7 +6,7 @@
   "license": "MIT",
   "exports": "./dist/index.cjs",
   "files": [
-    "pal-manifest.json",
+    "yomni-manifest.json",
     "dist",
     "LICENSE"
   ],
@@ -29,10 +29,10 @@
     "react-dom": "^19.1.1",
     "typescript": "^5.9.2"
   },
-  "pal": {
-    "id": "pal.bilibili-anime",
+  "yomni": {
+    "id": "yomni.bilibili-anime",
     "apiVersion": 1,
     "runtime": "node",
-    "manifest": "./pal-manifest.json"
+    "manifest": "./yomni-manifest.json"
   }
 }

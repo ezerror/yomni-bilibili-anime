@@ -4,22 +4,24 @@
   "category": "media",
   "icon": "tv",
   "requiresHost": {
-    "pal.plugin.hostPanel.message": 3,
-    "pal.plugin.hostPanel.contentDirective": 1,
-    "pal.context.catalog": 1,
-    "pal.context.lifetime": 2,
-    "pal.context.withCallPolicy": 1,
-    "pal.services.callerAuthority": 1,
-    "pal.context.selectService": 1,
-    "pal.ui.workbench.hostRenderer": 2
+    "yomni.plugin.hostPanel.message": 3,
+    "yomni.plugin.hostPanel.contentDirective": 1,
+    "yomni.context.catalog": 1,
+    "yomni.context.lifetime": 2,
+    "yomni.context.withCallPolicy": 1,
+    "yomni.services.callerAuthority": 1,
+    "yomni.context.selectService": 1,
+    "yomni.ui.workbench.hostRenderer": 2
   },
-  "extensions": ["pal.ui.panel"],
+  "extensions": [
+    "yomni.ui.panel"
+  ],
   "permissions": [
-    "pal.network.fetch",
-    "pal.browser.control",
-    "pal.storage.read",
-    "pal.storage.write",
-    "pal.agent-support.read"
+    "yomni.network.fetch",
+    "yomni.browser.control",
+    "yomni.storage.read",
+    "yomni.storage.write",
+    "yomni.agent-support.read"
   ],
   "hostRenderers": {
     "anime": {
@@ -37,8 +39,8 @@
     "provides": {
       "ui": [
         {
-          "id": "pal.bilibili-anime.player",
-          "slot": "pal.ui.panel",
+          "id": "yomni.bilibili-anime.player",
+          "slot": "yomni.ui.panel",
           "description": "Interactive anime search and episode player",
           "messagePresentation": true,
           "contentDirective": "bilibili-anime"
@@ -46,11 +48,11 @@
       ],
       "access": [
         {
-          "id": "pal.bilibili-anime.tools.catalog",
+          "id": "yomni.bilibili-anime.tools.catalog",
           "title": "Read provided tools",
           "description": "Read provided tools",
           "group": {
-            "id": "pal.tools",
+            "id": "yomni.tools",
             "title": "Tools",
             "locales": {
               "zh": {
@@ -68,16 +70,16 @@
           "scope": "global",
           "target": {
             "kind": "service-method",
-            "contract": "pal.tools.provider",
+            "contract": "yomni.tools.provider",
             "operation": "catalog"
           }
         },
         {
-          "id": "pal.bilibili-anime.tools.validate",
+          "id": "yomni.bilibili-anime.tools.validate",
           "title": "Validate a tool call",
           "description": "Validate a tool call",
           "group": {
-            "id": "pal.tools",
+            "id": "yomni.tools",
             "title": "Tools",
             "locales": {
               "zh": {
@@ -95,16 +97,16 @@
           "scope": "global",
           "target": {
             "kind": "service-method",
-            "contract": "pal.tools.provider",
+            "contract": "yomni.tools.provider",
             "operation": "validate"
           }
         },
         {
-          "id": "pal.bilibili-anime.tools.prepare",
+          "id": "yomni.bilibili-anime.tools.prepare",
           "title": "Prepare a tool call",
           "description": "Prepare a tool call",
           "group": {
-            "id": "pal.tools",
+            "id": "yomni.tools",
             "title": "Tools",
             "locales": {
               "zh": {
@@ -122,16 +124,16 @@
           "scope": "global",
           "target": {
             "kind": "service-method",
-            "contract": "pal.tools.provider",
+            "contract": "yomni.tools.provider",
             "operation": "prepare"
           }
         },
         {
-          "id": "pal.bilibili-anime.tools.execute",
+          "id": "yomni.bilibili-anime.tools.execute",
           "title": "Execute a prepared tool",
           "description": "Execute a prepared tool",
           "group": {
-            "id": "pal.tools",
+            "id": "yomni.tools",
             "title": "Tools",
             "locales": {
               "zh": {
@@ -149,16 +151,16 @@
           "scope": "global",
           "target": {
             "kind": "service-method",
-            "contract": "pal.tools.provider",
+            "contract": "yomni.tools.provider",
             "operation": "execute"
           }
         },
         {
-          "id": "pal.bilibili-anime.tools.release-prepared",
+          "id": "yomni.bilibili-anime.tools.release-prepared",
           "title": "Release a tool preparation",
           "description": "Release a tool preparation",
           "group": {
-            "id": "pal.tools",
+            "id": "yomni.tools",
             "title": "Tools",
             "locales": {
               "zh": {
@@ -176,16 +178,16 @@
           "scope": "global",
           "target": {
             "kind": "service-method",
-            "contract": "pal.tools.provider",
+            "contract": "yomni.tools.provider",
             "operation": "releasePrepared"
           }
         },
         {
-          "id": "pal.bilibili-anime.tools.preview",
+          "id": "yomni.bilibili-anime.tools.preview",
           "title": "Preview tool input",
           "description": "Preview tool input",
           "group": {
-            "id": "pal.tools",
+            "id": "yomni.tools",
             "title": "Tools",
             "locales": {
               "zh": {
@@ -203,16 +205,16 @@
           "scope": "global",
           "target": {
             "kind": "service-method",
-            "contract": "pal.tools.provider",
+            "contract": "yomni.tools.provider",
             "operation": "preview"
           }
         },
         {
-          "id": "pal.bilibili-anime.tools.result-available",
+          "id": "yomni.bilibili-anime.tools.result-available",
           "title": "Check retained tool access",
           "description": "Check retained tool access",
           "group": {
-            "id": "pal.tools",
+            "id": "yomni.tools",
             "title": "Tools",
             "locales": {
               "zh": {
@@ -230,12 +232,12 @@
           "scope": "global",
           "target": {
             "kind": "service-method",
-            "contract": "pal.tools.provider",
+            "contract": "yomni.tools.provider",
             "operation": "resultAvailable"
           }
         },
         {
-          "id": "pal.bilibili-anime.support.prompt-provider.catalog",
+          "id": "yomni.bilibili-anime.support.prompt-provider.catalog",
           "title": "Read prompt declarations",
           "description": "Read prompt declarations",
           "locales": {
@@ -245,7 +247,7 @@
             }
           },
           "group": {
-            "id": "pal.agent-support",
+            "id": "yomni.agent-support",
             "title": "Agent support",
             "locales": {
               "zh": {
@@ -257,12 +259,12 @@
           "scope": "global",
           "target": {
             "kind": "service-method",
-            "contract": "pal.agent-support.prompt-provider",
+            "contract": "yomni.agent-support.prompt-provider",
             "operation": "catalog"
           }
         },
         {
-          "id": "pal.bilibili-anime.support.prompt-provider.provide",
+          "id": "yomni.bilibili-anime.support.prompt-provider.provide",
           "title": "Read a prompt section",
           "description": "Read a prompt section",
           "locales": {
@@ -272,7 +274,7 @@
             }
           },
           "group": {
-            "id": "pal.agent-support",
+            "id": "yomni.agent-support",
             "title": "Agent support",
             "locales": {
               "zh": {
@@ -284,7 +286,7 @@
           "scope": "global",
           "target": {
             "kind": "service-method",
-            "contract": "pal.agent-support.prompt-provider",
+            "contract": "yomni.agent-support.prompt-provider",
             "operation": "provide"
           }
         }
@@ -297,15 +299,17 @@
       "title": "Search Bilibili anime",
       "description": "Search Bilibili anime and create an interactive player in this conversation. Include the returned directive verbatim on its own line in your reply, outside code fences. The player supports season and episode switching without another model call.",
       "requiredPermissions": [
-        "pal.network.fetch",
-        "pal.storage.read",
-        "pal.storage.write"
+        "yomni.network.fetch",
+        "yomni.storage.read",
+        "yomni.storage.write"
       ],
       "workspaceEffects": "none",
       "inputSchema": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["keyword"],
+        "required": [
+          "keyword"
+        ],
         "properties": {
           "keyword": {
             "type": "string",
@@ -333,26 +337,30 @@
       "description": "Show the interactive anime player",
       "mode": "static",
       "when": {
-        "anyToolAvailable": ["bilibili_search_anime"]
+        "anyToolAvailable": [
+          "bilibili_search_anime"
+        ]
       },
       "text": "When the user requests anime on Bilibili, call bilibili_search_anime. The tool stores its result as a plugin-owned player. Copy its directive exactly on a standalone line in your reply, outside code fences. The directive starts with :::yomni:bilibili-anime followed by a space and the returned JSON object; preserve this entire visible prefix. Do not reconstruct the player in Markdown or repeat the episode list. Clicking seasons or episodes is handled directly by the plugin. Playback is provided by Bilibili's official player."
     }
   ],
   "provides": {
-    "pal.bilibili-anime.agent-support.prompts": {
-      "contract": "pal.agent-support.prompt-provider",
+    "yomni.bilibili-anime.agent-support.prompts": {
+      "contract": "yomni.agent-support.prompt-provider",
       "apiVersion": 1
     },
-    "pal.bilibili-anime.tools": {
-      "contract": "pal.tools.provider",
+    "yomni.bilibili-anime.tools": {
+      "contract": "yomni.tools.provider",
       "apiVersion": 1,
       "transport": "reference"
     }
   },
-  "contributions": ["services"],
+  "contributions": [
+    "services"
+  ],
   "consumes": {
     "toolAuthorizations": {
-      "contract": "pal.tools.authorizations",
+      "contract": "yomni.tools.authorizations",
       "apiVersion": 1,
       "transport": "reference",
       "optional": true,
@@ -360,5 +368,7 @@
       "bindingMode": "dynamic"
     }
   },
-  "optionalPermissions": ["pal.agent-support.read"]
+  "optionalPermissions": [
+    "yomni.agent-support.read"
+  ]
 }
