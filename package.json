@@ -8,7 +8,8 @@
   "files": [
     "yomni-manifest.json",
     "dist",
-    "LICENSE"
+    "LICENSE",
+    "assets"
   ],
   "scripts": {
     "build": "yomni-plugin-build .",
