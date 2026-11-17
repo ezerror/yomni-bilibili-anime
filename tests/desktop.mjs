@@ -309,7 +309,7 @@ try {
     await expect
       .poll(() =>
         player.evaluate((element) =>
-          element.closest(".mu-scope")?.getAttribute("data-theme"),
+          element.closest(".yomni-scope")?.getAttribute("data-theme"),
         ),
       )
       .toBe(mode);

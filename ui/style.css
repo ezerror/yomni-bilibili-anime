@@ -11,9 +11,9 @@
   max-width: 560px;
   min-width: 0;
   padding: 12px;
-  color: var(--mu-ink);
-  background: var(--mu-card);
-  border: 1px solid var(--mu-line);
+  color: var(--yomni-ink);
+  background: var(--yomni-card);
+  border: 1px solid var(--yomni-line);
   border-radius: 12px;
   font-size: 13px;
 }
@@ -27,10 +27,10 @@
   flex: 1;
   min-width: 0;
 }
-.anime-search .mu-field {
+.anime-search .yomni-field {
   min-width: 0;
 }
-.anime-search .mu-input {
+.anime-search .yomni-input {
   font-size: 13px;
 }
 .anime-search > button {
@@ -42,22 +42,22 @@
   gap: 4px;
   margin: 0 0 10px;
 }
-.anime-player .mu-button {
+.anime-player .yomni-button {
   min-height: 26px;
   border-radius: 6px;
   font-size: 12px;
-  font-weight: var(--mu-font-weight-normal, 400);
+  font-weight: var(--yomni-font-weight-normal, 400);
 }
-.anime-seasons .mu-button {
+.anime-seasons .yomni-button {
   max-width: 100%;
   height: auto;
   white-space: normal;
   text-align: left;
 }
 .anime-player button[aria-pressed="true"] {
-  background: var(--mu-soft);
-  box-shadow: inset 0 0 0 1px var(--mu-line);
-  color: var(--mu-ink);
+  background: var(--yomni-soft);
+  box-shadow: inset 0 0 0 1px var(--yomni-line);
+  color: var(--yomni-ink);
 }
 .anime-heading {
   display: flex;
@@ -72,7 +72,7 @@
   font-weight: 550;
 }
 .anime-heading > span {
-  color: var(--mu-muted);
+  color: var(--yomni-muted);
   font-size: 11px;
 }
 .anime-viewport {
@@ -81,7 +81,7 @@
   aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 7px;
-  background: var(--mu-soft);
+  background: var(--yomni-soft);
 }
 .anime-placeholder,
 .anime-empty {
@@ -90,7 +90,7 @@
   justify-content: center;
   flex-direction: column;
   gap: 10px;
-  color: var(--mu-muted);
+  color: var(--yomni-muted);
   text-align: center;
 }
 .anime-placeholder {
@@ -122,7 +122,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: var(--mu-muted);
+  color: var(--yomni-muted);
   font-size: 12px;
 }
 .anime-episode-number {
@@ -135,7 +135,7 @@
   flex: none;
   gap: 2px;
 }
-.anime-actions .mu-button {
+.anime-actions .yomni-button {
   width: 26px;
   height: 26px;
   min-width: 26px;
@@ -145,7 +145,7 @@
   height: 12px;
   width: 1px;
   margin: 0 3px;
-  background: var(--mu-line);
+  background: var(--yomni-line);
 }
 .anime-episodes {
   display: grid;
@@ -156,15 +156,15 @@
   padding: 4px 2px 2px;
   scrollbar-width: thin;
 }
-.anime-episodes .mu-button {
+.anime-episodes .yomni-button {
   width: 100%;
   min-width: 0;
-  border: 1px solid var(--mu-line);
+  border: 1px solid var(--yomni-line);
   font-variant-numeric: tabular-nums;
 }
 .anime-error {
   padding: 7px 0;
-  color: var(--mu-danger);
+  color: var(--yomni-danger);
   font-size: 12px;
 }
 .anime-player :focus-visible {

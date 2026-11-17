@@ -404,7 +404,7 @@ export default function AnimePanel(props: Props) {
   const theme = props.snapshot.theme;
   const variables = Object.fromEntries(
     Object.entries(theme?.colors ?? {}).map(([key, value]) => [
-      `--mu-${key}`,
+      `--yomni-${key}`,
       value,
     ]),
   );
@@ -420,7 +420,7 @@ export default function AnimePanel(props: Props) {
         style={
           {
             ...variables,
-            "--mu-accent": theme?.accent,
+            "--yomni-accent": theme?.accent,
             fontFamily: "inherit",
           } as React.CSSProperties
         }
